@@ -1,53 +1,54 @@
-![Astro Sphere Lighthouse Score](_astrosphere.jpg)
+# hamid-yosefzai.dev — Personal Portfolio
 
-Astro Sphere is a static, minimalist, lightweight, lightning fast portfolio and blog theme based on my personal website.
+Personal portfolio and blog of **Hamid Yosefsei** — Software Engineer & Founder.
 
-It is primarily Astro, Tailwind and Typescript, with a very small amount of SolidJS for stateful components.
+Built with [Astro](https://astro.build), Tailwind CSS, and TypeScript. Based on the Astro Sphere template, customized into a minimalist developer portfolio.
 
-## 🚀 Deploy your own
+## Stack
 
-[![Deploy with Vercel](_deploy_vercel.svg)](https://vercel.com/new/clone?repository-url=https://github.com/markhorn-dev/astro-sphere)  [![Deploy with Netlify](_deploy_netlify.svg)](https://app.netlify.com/start/deploy?repository=https://github.com/markhorn-dev/astro-sphere)
+- **Framework**: Astro (static site generation)
+- **Styling**: Tailwind CSS v3 + CSS custom properties
+- **Language**: TypeScript
+- **Content**: Markdown / MDX via Astro Content Collections
+- **Fonts**: Inter (UI) · Lora (prose)
+- **Theme**: Light / Dark (system preference + toggle)
 
-## 📋 Features
+## Structure
 
-- ✅ 100/100 Lighthouse performance
-- ✅ Responsive
-- ✅ Accessible
-- ✅ SEO-friendly
-- ✅ Typesafe
-- ✅ Minimal style
-- ✅ Light/Dark Theme
-- ✅ Animated UI
-- ✅ Tailwind styling
-- ✅ Auto generated sitemap
-- ✅ Auto generated RSS Feed
-- ✅ Markdown support
-- ✅ MDX Support (components in your markdown)
-- ✅ Searchable content (posts and projects)
-- ✅ Code Blocks - copy to clipboard
+```
+src/
+  components/   UI components (Header, Footer, ArrowCard, …)
+  content/      blog/, projects/, work/, legal/
+  layouts/      Page and article layout wrappers
+  pages/        Route pages
+  styles/       global.css with CSS token system
+public/         Static assets (fonts, SVGs, favicon)
+```
 
-## 💯 Lighthouse score
-![Astro Sphere Lighthouse Score](_lighthouse.png)
+## Commands
 
-## 🕊️ Lightweight
-All pages under 100kb (including fonts)
+Run from the project root:
 
-## ⚡︎ Fast
-Rendered in ~40ms on localhost
+| Command         | Action                        |
+| :-------------- | :---------------------------- |
+| `pnpm install`  | Install dependencies          |
+| `pnpm dev`      | Start dev server at localhost |
+| `pnpm build`    | Build for production          |
+| `pnpm preview`  | Preview production build      |
 
-## 📄 Configuration
+## Projects
 
-The blog posts on the demo serve as the documentation and configuration.
+- **[Brieffix](https://brieffix.de)** — AI letter generator for German bureaucracy
+- **[Dolmetschernetz](https://dolmetschernetz.com)** — Germany's interpreter marketplace
+- **[Amt-Vernetzt](https://amt-vernetzt.de)** — Cross-agency government collaboration platform
+- **[BricksSnap](https://github.com/Hamido212/BricksSnap)** — Open-source Bricks Builder JSON template generator
 
-## 💻 Commands
+## Contact
 
-All commands are run from the root of the project, from a terminal:
+- GitHub: [github.com/Hamido212](https://github.com/Hamido212)
+- LinkedIn: [linkedin.com/in/hamid-yosefzai](https://www.linkedin.com/in/hamid-yosefzai/)
+- Email: hi@seid.dev
 
-Replace npm with your package manager of choice. `npm`, `pnpm`, `yarn`, `bun`, etc
-
-| Command                   | Action                                           |
-| :------------------------ | :----------------------------------------------- |
-| `npm install`             | Installs dependencies                            |
 | `npm run dev`             | Starts local dev server at `localhost:4321`      |
 | `npm run dev:network`     | Starts dev server on local network               |
 | `npm run sync`            | Generates TypeScript types for all Astro modules.|
