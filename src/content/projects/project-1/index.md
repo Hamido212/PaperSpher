@@ -7,7 +7,7 @@ tags:
 - SaaS
 - AI
 - TypeScript
-- Astro
+- Next.js
 demoUrl: https://www.brieffix.de
 ---
 
@@ -33,4 +33,4 @@ Brieffix is a German-language SaaS that uses AI to generate formal, ready-to-sen
 
 ### Tech Stack
 
-Frontend built with Astro and TypeScript, React islands for interactive areas. AI backend via API. Personal archive for saved letters.
+Next.js · TypeScript · Shadcn/UI · Brevo (transactional email) · Vercel
