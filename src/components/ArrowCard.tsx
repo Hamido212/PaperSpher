@@ -15,7 +15,7 @@ export default function ArrowCard({ entry, pill }: Props) {
       <a
         href={`/${entry.collection}/${entry.slug}`}
         class="group flex items-baseline gap-4 py-3 border-b transition-colors duration-200"
-        style={{ borderColor: "var(--color-border)" }}
+        style={{ "border-color": "var(--color-border)" }}
       >
         <time
           class="shrink-0 text-xs tabular-nums font-mono"
@@ -60,7 +60,7 @@ export default function ArrowCard({ entry, pill }: Props) {
           {pill && (
             <div
               class="text-xs capitalize px-2 py-0.5 rounded border"
-              style={{ borderColor: "var(--color-border)", color: "var(--color-text-subtle)" }}
+              style={{ "border-color": "var(--color-border)", color: "var(--color-text-subtle)" }}
             >
               project
             </div>
