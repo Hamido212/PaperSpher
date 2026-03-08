@@ -1,0 +1,10 @@
+<svg xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <symbol id="brand" viewBox="0 0 64 64">
+      <!-- H -->
+      <path fill="currentColor" d="M4 10H10V54H4Z M22 10H28V54H22Z M4 28H28V34H4Z"/>
+      <!-- Y -->
+      <path fill="currentColor" d="M32 10H38L49 32H43Z M60 10H54L43 32H49Z M43 32H49V54H43Z"/>
+    </symbol>
+  </defs>
+</svg>

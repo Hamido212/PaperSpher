@@ -1,0 +1,36 @@
+---
+import { getCollection } from "astro:content";
+import PageLayout from "@layouts/PageLayout.astro";
+import ArrowCard from "@components/ArrowCard";
+import { PROJECTS } from "@consts";
+
+const projects = (await getCollection("projects"))
+  .filter((project) => !project.data.draft)
+  .sort((a, b) => b.data.date.getTime() - a.data.date.getTime());
+---
+
+<PageLayout title={PROJECTS.TITLE} description={PROJECTS.DESCRIPTION}>
+  <div class="mx-auto max-w-2xl px-5 pt-24 pb-24 space-y-10">
+
+    <!-- Header -->
+    <div class="animate">
+      <div class="flex items-center gap-2.5 mb-2">
+        <span class="block w-0.5 h-5 rounded-full" style="background-color: var(--color-accent);"></span>
+        <h1 class="text-2xl font-bold tracking-tight" style="color: var(--color-text); letter-spacing: -0.03em;">
+          {PROJECTS.TITLE}
+        </h1>
+      </div>
+      <p class="text-sm pl-5" style="color: var(--color-text-muted);">
+        {PROJECTS.DESCRIPTION}
+      </p>
+    </div>
+
+    <!-- Project feed — clean list, no sidebar -->
+    <div class="animate space-y-4">
+      {projects.map((project) => (
+        <ArrowCard entry={project} />
+      ))}
+    </div>
+
+  </div>
+</PageLayout>

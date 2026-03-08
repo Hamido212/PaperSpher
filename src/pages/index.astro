@@ -1,0 +1,151 @@
+---
+import { getCollection } from "astro:content"
+import PageLayout from "@layouts/PageLayout.astro"
+import ArrowCard from "@components/ArrowCard"
+import { SITE, SOCIALS } from "@consts"
+
+const posts = (await getCollection("blog"))
+  .filter(post => !post.data.draft)
+  .sort((a, b) => b.data.date.getTime() - a.data.date.getTime())
+  .slice(0, 5)
+
+const projects = (await getCollection("projects"))
+  .filter(project => !project.data.draft)
+  .sort((a, b) => b.data.date.getTime() - a.data.date.getTime())
+---
+
+<PageLayout title="Home" description={SITE.DESCRIPTION}>
+  <div class="mx-auto max-w-2xl px-5 pt-20 pb-24 space-y-16">
+
+    <!-- ── HERO ─────────────────────────────────────────────── -->
+    <section class="animate">
+      <div class="flex flex-col sm:flex-row items-start gap-6">
+        <!-- Avatar: larger than steipete (160px vs 80px) -->
+        <div class="shrink-0 mx-auto sm:mx-0">
+          <img
+            src="/hy.jpg"
+            alt="Hamid Yosefsei"
+            width="120"
+            height="120"
+            class="rounded-full border-2 transition-transform duration-300 hover:scale-105"
+            style="border-color: var(--color-border); background-color: var(--color-bg-surface);"
+            onerror="this.style.display='none'"
+          />
+        </div>
+
+        <!-- Bio block -->
+        <div class="space-y-3">
+          <!-- SEID badge — unique brand marker -->
+          <div class="flex items-center gap-2">
+            <span
+              class="text-xs font-mono px-2 py-0.5 rounded-sm tracking-widest uppercase"
+              style="background: var(--color-accent-subtle); color: var(--color-accent); border: 1px solid var(--color-accent-subtle);"
+            >
+              seid.dev
+            </span>
+            <span
+              class="text-xs font-mono px-2 py-0.5 rounded-sm tracking-widest uppercase"
+              style="background: var(--color-bg-surface); color: var(--color-text-subtle); border: 1px solid var(--color-border);"
+            >
+              hyos.tech
+            </span>
+          </div>
+
+          <h1 class="text-2xl font-bold tracking-tight leading-tight" style="letter-spacing: -0.03em; color: var(--color-text);">
+            Hi, I'm <span style="color: var(--color-accent);">Hamid Yosefsei</span>. 👋
+          </h1>
+
+          <p class="text-sm leading-relaxed max-w-sm" style="color: var(--color-text-body);">
+            Software engineer & founder. I build products with conviction and the infrastructure to run them—
+            privacy-first, German-market focused, no bloat.
+          </p>
+
+          <!-- Social icons + email -->
+          <div class="flex items-center gap-3 pt-1">
+            {SOCIALS.map(social => (
+              <a
+                href={social.HREF}
+                target="_blank"
+                rel="noopener noreferrer"
+                aria-label={social.NAME}
+                title={social.TEXT}
+                class="transition-all duration-200 hover:opacity-50"
+                style="color: var(--color-text-muted);"
+              >
+                <svg class="size-5 fill-current">
+                  <use href={`/social.svg#${social.ICON}`} />
+                </svg>
+              </a>
+            ))}
+            <a
+              href="/rss.xml"
+              target="_blank"
+              aria-label="RSS Feed"
+              title="RSS Feed"
+              class="transition-all duration-200 hover:opacity-50"
+              style="color: var(--color-text-muted);"
+            >
+              <svg class="size-5 stroke-current fill-none" viewBox="0 0 24 24" stroke-width="2">
+                <path d="M4 11a9 9 0 0 1 9 9" /><path d="M4 4a16 16 0 0 1 16 16" />
+                <circle cx="5" cy="19" r="1" fill="currentColor" />
+              </svg>
+            </a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ── FLAGSHIP PROJECTS ──────────────────────────────────── -->
+    <section class="animate space-y-5">
+      <div class="flex items-center justify-between">
+        <div class="flex items-center gap-2.5">
+          <span class="block w-0.5 h-4 rounded-full" style="background-color: var(--color-accent);"></span>
+          <span class="text-xs font-mono font-semibold uppercase tracking-widest" style="color: var(--color-text-subtle);">Projects</span>
+        </div>
+        <a href="/projects" class="text-xs font-mono hover:underline underline-offset-2" style="color: var(--color-accent);">all &rarr;</a>
+      </div>
+      <div class="space-y-3">
+        {projects.map(project => (
+          <ArrowCard entry={project} />
+        ))}
+      </div>
+    </section>
+
+    <!-- ── RECENT POSTS ────────────────────────────────────────── -->
+    <section class="animate space-y-5">
+      <div class="flex items-center justify-between">
+        <div class="flex items-center gap-2.5">
+          <span class="block w-0.5 h-4 rounded-full" style="background-color: var(--color-accent);"></span>
+          <span class="text-xs font-mono font-semibold uppercase tracking-widest" style="color: var(--color-text-subtle);">Writing</span>
+        </div>
+        <a href="/blog" class="text-xs font-mono hover:underline underline-offset-2" style="color: var(--color-accent);">all &rarr;</a>
+      </div>
+      <div>
+        {posts.map(post => (
+          <ArrowCard entry={post} />
+        ))}
+      </div>
+    </section>
+
+    <!-- ── ABOUT (concise, below the fold) ───────────────────── -->
+    <section class="animate">
+      <div
+        class="rounded-lg p-5 space-y-3 text-sm leading-relaxed border"
+        style="background-color: var(--color-bg-surface); border-color: var(--color-border); color: var(--color-text-body);"
+      >
+        <p>
+          I care about <strong style="color: var(--color-text);">clean architecture</strong>, user-facing simplicity, and software that respects people —
+          no dark patterns, no surveillance, no bloat.
+        </p>
+        <p>
+          My flagship products are <a href="https://brieffix.de" target="_blank" rel="noopener noreferrer" class="hover:underline font-medium" style="color: var(--color-text);">Brieffix</a> (AI letter generator for German bureaucracy)
+          and <a href="https://dolmetschernetz.de" target="_blank" rel="noopener noreferrer" class="hover:underline font-medium" style="color: var(--color-text);">Dolmetschernetz</a> (Germany's interpreter marketplace).
+        </p>
+        <p>
+          <a href="/work" class="hover:underline" style="color: var(--color-accent);">Work history →</a>
+        </p>
+      </div>
+    </section>
+
+  </div>
+</PageLayout>

@@ -1,0 +1,36 @@
+---
+import { getCollection } from "astro:content";
+import PageLayout from "@layouts/PageLayout.astro";
+import ArrowCard from "@components/ArrowCard";
+import { BLOG } from "@consts";
+
+const posts = (await getCollection("blog"))
+  .filter((post) => !post.data.draft)
+  .sort((a, b) => b.data.date.getTime() - a.data.date.getTime());
+---
+
+<PageLayout title={BLOG.TITLE} description={BLOG.DESCRIPTION}>
+  <div class="mx-auto max-w-2xl px-5 pt-24 pb-24 space-y-10">
+
+    <!-- Header -->
+    <div class="animate">
+      <div class="flex items-center gap-2.5 mb-2">
+        <span class="block w-0.5 h-5 rounded-full" style="background-color: var(--color-accent);"></span>
+        <h1 class="text-2xl font-bold tracking-tight" style="color: var(--color-text); letter-spacing: -0.03em;">
+          {BLOG.TITLE}
+        </h1>
+      </div>
+      <p class="text-sm pl-5" style="color: var(--color-text-muted);">
+        {BLOG.DESCRIPTION}
+      </p>
+    </div>
+
+    <!-- Post feed — date + title only, steipete.me style -->
+    <div class="animate">
+      {posts.map((post) => (
+        <ArrowCard entry={post} />
+      ))}
+    </div>
+
+  </div>
+</PageLayout>

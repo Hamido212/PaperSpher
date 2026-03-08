@@ -1,0 +1,256 @@
+/* ─── Google Fonts: Inter (UI) + Lora (Blog Prose) ─────────────────────── */
+@import url("https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Lora:ital,wght@0,400;0,600;1,400&display=swap");
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* ─── SEID · HyOS — Design Token / Custom Properties ────────────────────── */
+:root {
+  --copy-btn-margin: 10px;
+
+  /* Light mode — Clean, editorial white */
+  --color-bg:            #fafafa;
+  --color-bg-surface:    #f4f4f5;
+  --color-bg-elevated:   #ffffff;
+  --color-border:        #e4e4e7;
+  --color-border-strong: #d1d1d6;
+  --color-text:          #18181b;      /* near-black, not pure black — easier on eyes */
+  --color-text-body:     #3f3f46;      /* paragraphs — readable without being stark */
+  --color-text-muted:    #71717a;      /* secondary labels, captions */
+  --color-text-subtle:   #a1a1aa;      /* decorative only, metadata */
+  --color-accent:        #4f46e5;      /* Indigo — VSCode-inspired */
+  --color-accent-subtle: rgba(79, 70, 229, 0.10);
+  --color-glass-bg:      rgba(244, 244, 245, 0.70);
+  --color-glass-border:  rgba(0, 0, 0, 0.08);
+}
+
+html.dark {
+  /* Dark mode — Deep Charcoal, editor-grade black */
+  --color-bg:            #09090b;
+  --color-bg-surface:    #111113;
+  --color-bg-elevated:   #18181b;
+  --color-border:        #27272a;
+  --color-border-strong: #3f3f46;
+  --color-text:          #fafafa;
+  --color-text-body:     #d4d4d8;      /* paragraphs — warm white, not stark */
+  --color-text-muted:    #a1a1aa;      /* secondary labels */
+  --color-text-subtle:   #71717a;      /* decorative only, metadata */
+  --color-accent:        #818cf8;      /* Soft indigo for dark — easier on eyes */
+  --color-accent-subtle: rgba(129, 140, 248, 0.12);
+  --color-glass-bg:      rgba(24, 24, 27, 0.70);
+  --color-glass-border:  rgba(255, 255, 255, 0.06);
+}
+
+/* ─── Base Typography & Layout ──────────────────────────────────────────── */
+@layer base {
+  @font-face {
+    font-family: "Atkinson";
+    src: url("/fonts/atkinson-regular.woff") format("woff");
+    font-weight: 400;
+    font-style: normal;
+    font-display: swap;
+  }
+
+  @font-face {
+    font-family: "Atkinson";
+    src: url("/fonts/atkinson-bold.woff") format("woff");
+    font-weight: 700;
+    font-style: normal;
+    font-display: swap;
+  }
+}
+
+html {
+  overflow-y: scroll;
+  color-scheme: light;
+  background-color: var(--color-bg);
+  font-family: "Inter", "Atkinson", system-ui, sans-serif;
+  font-feature-settings: "cv02", "cv03", "cv04", "cv11";
+}
+
+html.dark {
+  color-scheme: dark;
+  background-color: var(--color-bg);
+}
+
+html,
+body {
+  @apply h-full w-full antialiased;
+  background-color: var(--color-bg);
+  color: var(--color-text-body);
+}
+
+body {
+  @apply relative flex flex-col;
+}
+
+main {
+  @apply flex flex-col flex-1;
+  background-color: var(--color-bg);
+}
+
+header {
+  @apply border-b;
+  @apply transition-all duration-300 ease-in-out;
+}
+
+header:not(.scrolled) {
+  @apply bg-transparent border-transparent;
+}
+
+header.scrolled {
+  background-color: color-mix(in srgb, var(--color-bg) 80%, transparent);
+  border-color: var(--color-border);
+  @apply backdrop-blur-sm saturate-150;
+}
+
+/* ─── Blog prose — Serif for maximal readability ────────────────────────── */
+article {
+  @apply prose dark:prose-invert max-w-full pb-12;
+}
+
+article p,
+article li,
+article blockquote {
+  font-family: "Lora", Georgia, "Times New Roman", serif;
+  font-size: 1.0625rem;
+  line-height: 1.85;
+  letter-spacing: 0.01em;
+}
+
+article h1,
+article h2,
+article h3,
+article h4 {
+  font-family: "Inter", "Atkinson", system-ui, sans-serif;
+  letter-spacing: -0.02em;
+  color: var(--color-text);
+}
+
+.page-heading {
+  @apply font-semibold;
+  color: var(--color-text);
+  letter-spacing: -0.025em;
+}
+
+.blend {
+  @apply transition-all duration-300 ease-in-out;
+}
+
+/** Light theme particles on home page — reduced opacity for minimal aesthetic */
+@keyframes animateParticle {
+  from {
+    transform: translateY(0px);
+  }
+
+  to {
+    transform: translateY(-2000px);
+  }
+}
+
+/** styles for public /animation.js */
+.animate {
+  opacity: 0;
+  transform: translateY(16px);
+  transition: opacity 0.7s ease, transform 0.7s ease;
+}
+
+.animate.show {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+article img {
+  padding-top: 20px;
+  padding-bottom: 20px;
+  display: block;
+  margin: 0 auto;
+}
+
+/**
+ * TWINKLE STARS — reduced density via JS, kept subtle
+ */
+
+#twinkle-star.template {
+  @apply absolute -left-full;
+}
+
+#twinkle-star.twinkle {
+  @apply animate-twinkle;
+  opacity: 0.4; /* Subtler than default */
+}
+
+
+/**
+ * Meteors — muted for minimal aesthetic
+ */
+
+#meteors .shower {
+  @apply absolute inset-0 top-0;
+  @apply left-1/2 -translate-x-1/2;
+  @apply w-screen aspect-square;
+  opacity: 0.25; /* Significantly reduced */
+}
+
+#meteors .meteor {
+  @apply animate-meteor;
+  @apply absolute top-1/2 left-1/2 w-px h-[75vh];
+  @apply bg-gradient-to-b from-white to-transparent;
+}
+
+#meteors .shower.ur {
+  @apply rotate-45;
+}
+
+#meteors .shower.dr {
+  @apply rotate-135;
+}
+
+#meteors .shower.dl {
+  @apply rotate-225;
+}
+
+#meteors .shower.ul {
+  @apply rotate-315;
+}
+
+/* ─── Glassmorphism Project Cards ────────────────────────────────────────── */
+.card-glass {
+  background: var(--color-glass-bg);
+  border: 1px solid var(--color-glass-border);
+  backdrop-filter: blur(12px) saturate(160%);
+  -webkit-backdrop-filter: blur(12px) saturate(160%);
+}
+
+.card-glass:hover {
+  border-color: var(--color-accent-subtle);
+  background: color-mix(in srgb, var(--color-bg-elevated) 90%, var(--color-accent) 10%);
+}
+
+.copy-cnt {
+  @apply absolute w-full;
+  top: var(--copy-btn-margin);
+}
+
+.copy-btn {
+  @apply w-[30px] fixed;
+  left: calc(100% - var(--copy-btn-margin));
+  transform: translateX(-100%);
+}
+
+.copy-svg {
+  @apply w-full aspect-square text-white opacity-70 hover:opacity-90;
+}
+
+/* Card transition */
+/* .fade-move-enter-active,
+.fade-move-exit-active {
+  transition: all 300ms ease;
+}
+
+.fade-move-enter-from,
+.fade-move-exit-to {
+  opacity: 0;
+  transform: translateY(10px);
+} */
